@@ -77,6 +77,23 @@ public class TaskFragment extends Fragment {
         mTextViewDescription.setText(mTask.getDescription());
         mTextViewStatus.setText(mTask.getStatus());
 
+        Button mButtonNewTask = view.findViewById(R.id.buttonNewTask);
+        mButtonNewTask.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                mViewModel.setTask(mTask);
+
+                TaskAddFragment taskAddFragment = TaskAddFragment.newInstance();
+                assert getFragmentManager() != null;
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, taskAddFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
+
         Button mButtonNext = view.findViewById(R.id.buttonNext);
         mButtonNext.setOnClickListener(new View.OnClickListener(){
             @Override

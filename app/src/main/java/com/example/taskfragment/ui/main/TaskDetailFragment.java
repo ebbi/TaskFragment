@@ -19,7 +19,7 @@ import com.example.taskfragment.data.TaskRepository;
 
 public class TaskDetailFragment extends Fragment {
 
-    private static final String LOG_TAG = TaskFragment.class.getSimpleName();
+    private static final String LOG_TAG = TaskDetailFragment.class.getSimpleName();
 
     private Task mTask = new Task();
     private final TaskRepository sTaskRepository = TaskRepository.getInstance();
@@ -87,6 +87,7 @@ public class TaskDetailFragment extends Fragment {
         transaction.commit();
 
     }
+
 
     private void updateUI(View view) {
 

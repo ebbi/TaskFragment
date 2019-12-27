@@ -3,9 +3,9 @@ package com.example.taskfragment.data;
 public class Task {
 
     private int id;
-    private String title;
-    private String description;
-    private String status;
+    private String title = "Task title";
+    private String description = "Task description";
+    private String status = "Task status";
 
     public Task(){ }
 

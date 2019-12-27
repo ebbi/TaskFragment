@@ -86,4 +86,7 @@ public class TaskRepository {
         return nextTask;
     }
 
+    public void addTask(Task task) {
+        mTasks.add(task);
+    }
 }
