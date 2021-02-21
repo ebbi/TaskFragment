@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
@@ -40,7 +41,8 @@ public class TaskAddFragment extends Fragment {
         // return inflater.inflate(R.layout.fragment_add_task, container, false);
         Log.d( LOG_TAG, "onCreateView");
 
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+// deprecated: mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         final View view = inflater.inflate(R.layout.fragment_add_task, container, false);
         updateUI(view);
@@ -69,8 +71,14 @@ public class TaskAddFragment extends Fragment {
                 mViewModel.setTask(mTask);
 
                 TaskFragment taskFragment = TaskFragment.newInstance();
+
+/* deprecated
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+*/
+                assert getParentFragmentManager() != null;
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
                 transaction.replace(R.id.container, taskFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();

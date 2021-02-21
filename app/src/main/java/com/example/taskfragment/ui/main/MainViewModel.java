@@ -6,6 +6,7 @@ import com.example.taskfragment.data.Task;
 
 public class MainViewModel extends ViewModel {
 
+    // refactor to liveData
     private Task mTask;
 
     public Task getTask() {

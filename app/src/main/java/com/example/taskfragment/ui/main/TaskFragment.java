@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.taskfragment.R;
@@ -43,7 +44,8 @@ public class TaskFragment extends Fragment {
 
         Log.d( LOG_TAG, "onCreateView");
 
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+// deprecated mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         if (mViewModel.getTask() == null){
             mTask = sTaskRepository.getFirstTask();
@@ -85,8 +87,13 @@ public class TaskFragment extends Fragment {
                 mViewModel.setTask(mTask);
 
                 TaskAddFragment taskAddFragment = TaskAddFragment.newInstance();
+/* deprecated
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+*/
+                assert getParentFragmentManager() != null;
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
                 transaction.replace(R.id.container, taskAddFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -129,8 +136,16 @@ public class TaskFragment extends Fragment {
                 mViewModel.setTask(mTask);
 
                 TaskDetailFragment taskDetailFragment = TaskDetailFragment.newInstance();
+
+/* deprecated
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+*/
+                assert getParentFragmentManager() != null;
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+
+
                 transaction.replace(R.id.container, taskDetailFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();

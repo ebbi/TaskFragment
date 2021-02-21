@@ -3,7 +3,7 @@ package com.example.taskfragment.data;
 import java.util.ArrayList;
 
 public class TaskRepository {
-
+    // refactor Room , LiveData
     private static TaskRepository sTodoRepository;
 
     private final ArrayList<Task> mTasks = new ArrayList<>();

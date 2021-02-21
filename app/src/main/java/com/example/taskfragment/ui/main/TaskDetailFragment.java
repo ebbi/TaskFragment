@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.taskfragment.R;
@@ -34,7 +35,9 @@ public class TaskDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         assert getActivity() != null;
-        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+// deprecated: mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         mTask = mViewModel.getTask();
 
         View view = inflater.inflate(R.layout.fragment_task_detail, container, false);
@@ -80,8 +83,14 @@ public class TaskDetailFragment extends Fragment {
         mViewModel.setTask(mTask);
 
         TaskFragment taskFragment = TaskFragment.newInstance();
-        assert getFragmentManager() != null;
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+/* deprecated
+                assert getFragmentManager() != null;
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+*/
+        assert getParentFragmentManager() != null;
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
         transaction.replace(R.id.container, taskFragment);
         transaction.addToBackStack(null);
         transaction.commit();
