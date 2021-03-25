@@ -1,9 +1,7 @@
 package com.example.taskfragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.taskfragment.ui.main.TaskFragment;
 
 public class MainActivity extends AppCompatActivity {
