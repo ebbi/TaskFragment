@@ -44,7 +44,8 @@ public class TaskFragment extends Fragment {
 
         Log.d( LOG_TAG, "onCreateView");
 
-// deprecated mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+// deprecated
+// mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         if (mViewModel.getTask() == null){
@@ -133,18 +134,14 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                mViewModel.setTask(mTask);
-
                 TaskDetailFragment taskDetailFragment = TaskDetailFragment.newInstance();
-
+                taskDetailFragment.setViewModel(mViewModel);
 /* deprecated
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 */
                 assert getParentFragmentManager() != null;
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-
-
 
                 transaction.replace(R.id.container, taskDetailFragment);
                 transaction.addToBackStack(null);

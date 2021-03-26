@@ -33,10 +33,10 @@ public class TaskDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        assert getActivity() != null;
-// deprecated: mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+// deprecated:
+//        assert getActivity() != null;
+//        mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         mTask = mViewModel.getTask();
 
@@ -46,11 +46,14 @@ public class TaskDetailFragment extends Fragment {
 
     }
 
+    public void setViewModel(MainViewModel mViewModel) {
+        this.mViewModel = mViewModel;
+    }
+
     /* Create an anonymous implementation of OnClickListener for all clickable view objects */
     private final View.OnClickListener mTaskListener = new View.OnClickListener() {
 
         public void onClick(View view) {
-
             switch (view.getId()) {
 
                 case R.id.buttonSubmit:
@@ -96,7 +99,6 @@ public class TaskDetailFragment extends Fragment {
         transaction.commit();
 
     }
-
 
     private void updateUI(View view) {
 
